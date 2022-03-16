@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<label>Enter a name:
+    <input type="text" id="search">
+</label>
+<button id="get">Get JSON data</button>
+
+<div id="output"></div>
+
+<script src="//code.jquery.com/jquery.js"></script>
+<script>
+    $("#get").on("click", function() {
+        let search = $("#search").val().toLowerCase();
+
+        $.getJSON("student.json", function(result) {
+
+            $.each(result, function(index, item) {
+                if (item.name.last.toLowerCase().includes(search)) {
+                    $("#output").append(item.name.first
+                        + " " + item.name.last + ", " + item.gpa + "<br>");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
