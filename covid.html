@@ -2,32 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Covid Cases</title>
 </head>
 <body>
+    <h1>Covid Data</h1>
 
-<label>Enter a name:
-    <input type="text" id="search">
-</label>
-<button id="get">Get JSON data</button>
+    <label>Enter a country:
+        <input type="text" id="search">
+    </label>
+    <button id="get">Get JSON data</button>
 
-<div id="output"></div>
+    <div id="output"></div>
 
-<script src="//code.jquery.com/jquery.js"></script>
-<script>
-    $("#get").on("click", function() {
-        let search = $("#search").val().toLowerCase();
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script>
+        $("#get").on("click", function() {
+            let search = $("#search").val().toLowerCase();
 
-        $.getJSON("student.json", function(result) {
+            $.getJSON("covid.json", function(result) {
 
-            $.each(result, function(index, item) {
-                if (item.name.last.toLowerCase().includes(search)) {
-                    $("#output").append(item.name.first
-                        + " " + item.name.last + ", " + item.gpa + "<br>");
-                }
+                $.each(result, function(index, item) {
+                    if (item.Location.Country.toLowerCase().includes(search)) {
+                        $("#output").append(
+                            "Date: " +  item.Date.Month + "-" + item.Date.Month + "-" + item.Date.Year + "<br>" +
+                            "Cases: " + item.Data.Cases + "<br>" +
+                            "Deaths: " + item.Data.Deaths + "<br>" +
+                            "Population: " + item.Data.Population + "<br>" +
+                            "Rate: " + item.Data.Rate + "<br>" + "<br>");
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
